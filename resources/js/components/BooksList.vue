@@ -1,6 +1,6 @@
 <template>
     <div>
-		<h2 class="text-center">Список книг (<router-link to="/add" class="btn btn-link btn-lg" v-if="logged">Добавить книгу</router-link>)</h2>
+		<h2 class="text-center">Список книг <router-link to="/add" class="btn btn-link btn-lg" v-if="logged">( Добавить книгу )</router-link></h2>
 
         <form @submit.prevent="searchBooks">
         <div class="input-group">
@@ -47,7 +47,7 @@
         },
         created() {
             this.axios
-                .get('http://localhost:8001/api/books/')
+                .get('/api/books/')
                 .then(response => {
                     this.books = response.data;
                 });
@@ -58,7 +58,7 @@
         methods: {
             deleteBook(id) { 
                 this.axios
-                    .delete(`http://localhost:8001/api/books/${id}`)
+                    .delete(`/api/books/${id}`)
                     .then(response => {
                         let i = this.books.map(data => data.id).indexOf(id);
                         this.books.splice(i, 1)
@@ -67,7 +67,7 @@
 
             searchBooks() { 
             this.axios
-                .get(`http://localhost:8001/api/books/search/${this.searchKey}`)
+                .get(`/api/books/search/${this.searchKey}`)
                 .then(response => {
                     this.books = response.data;
                 });
@@ -75,7 +75,7 @@
 
             sortBooks() { 
             this.axios
-                .get(`http://localhost:8001/api/books/sort/${this.sort}`)
+                .get(`/api/books/sort/${this.sort}`)
                 .then(response => {
                     this.books = response.data;
                 });

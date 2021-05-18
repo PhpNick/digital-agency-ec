@@ -34,7 +34,7 @@
         methods: {
             addBook() {
                 this.axios
-                    .post('http://localhost:8001/api/books', this.book)
+                    .post('/api/books', this.book)
                     .then(response => (
                         this.$router.push({ name: 'index' })
                     ))

@@ -32,7 +32,7 @@
         },
         created() {
             this.axios
-                .get(`http://localhost:8001/api/books/${this.$route.params.id}`)
+                .get(`/api/books/${this.$route.params.id}`)
                 .then((res) => {
                     this.book = res.data;
                 });
@@ -40,7 +40,7 @@
         methods: {
             updateBook() {
                 this.axios
-                    .patch(`http://localhost:8001/api/books/${this.$route.params.id}`, this.book)
+                    .patch(`/api/books/${this.$route.params.id}`, this.book)
                     .then((res) => {
                         this.$router.push({ name: 'index' });
                     });

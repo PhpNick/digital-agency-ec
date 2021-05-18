@@ -1907,7 +1907,7 @@ __webpack_require__.r(__webpack_exports__);
     addBook: function addBook() {
       var _this = this;
 
-      this.axios.post('http://localhost:8001/api/books', this.book).then(function (response) {
+      this.axios.post('/api/books', this.book).then(function (response) {
         return _this.$router.push({
           name: 'index'
         });
@@ -1980,7 +1980,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.axios.get('http://localhost:8001/api/books/').then(function (response) {
+    this.axios.get('/api/books/').then(function (response) {
       _this.books = response.data;
     });
 
@@ -1992,7 +1992,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteBook: function deleteBook(id) {
       var _this2 = this;
 
-      this.axios["delete"]("http://localhost:8001/api/books/".concat(id)).then(function (response) {
+      this.axios["delete"]("/api/books/".concat(id)).then(function (response) {
         var i = _this2.books.map(function (data) {
           return data.id;
         }).indexOf(id);
@@ -2003,14 +2003,14 @@ __webpack_require__.r(__webpack_exports__);
     searchBooks: function searchBooks() {
       var _this3 = this;
 
-      this.axios.get("http://localhost:8001/api/books/search/".concat(this.searchKey)).then(function (response) {
+      this.axios.get("/api/books/search/".concat(this.searchKey)).then(function (response) {
         _this3.books = response.data;
       });
     },
     sortBooks: function sortBooks() {
       var _this4 = this;
 
-      this.axios.get("http://localhost:8001/api/books/sort/".concat(this.sort)).then(function (response) {
+      this.axios.get("/api/books/sort/".concat(this.sort)).then(function (response) {
         _this4.books = response.data;
       });
     }
@@ -2064,7 +2064,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.axios.get("http://localhost:8001/api/books/".concat(this.$route.params.id)).then(function (res) {
+    this.axios.get("/api/books/".concat(this.$route.params.id)).then(function (res) {
       _this.book = res.data;
     });
   },
@@ -2072,7 +2072,7 @@ __webpack_require__.r(__webpack_exports__);
     updateBook: function updateBook() {
       var _this2 = this;
 
-      this.axios.patch("http://localhost:8001/api/books/".concat(this.$route.params.id), this.book).then(function (res) {
+      this.axios.patch("/api/books/".concat(this.$route.params.id), this.book).then(function (res) {
         _this2.$router.push({
           name: 'index'
         });
@@ -59537,15 +59537,14 @@ var render = function() {
         "h2",
         { staticClass: "text-center" },
         [
-          _vm._v("Список книг ("),
+          _vm._v("Список книг "),
           _vm.logged
             ? _c(
                 "router-link",
                 { staticClass: "btn btn-link btn-lg", attrs: { to: "/add" } },
-                [_vm._v("Добавить книгу")]
+                [_vm._v("( Добавить книгу )")]
               )
-            : _vm._e(),
-          _vm._v(")")
+            : _vm._e()
         ],
         1
       ),
