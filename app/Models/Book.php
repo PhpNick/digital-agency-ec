@@ -30,6 +30,7 @@ class Book extends Model
             'books.co_author' => 10,
             'books.title' => 10,
             'books.description' => 10,
+            'books.created_at' => 10,
         ],
     ];    
 
@@ -53,5 +54,10 @@ class Book extends Model
     public function scopeSortByDescription($query)
     {
         return $query->orderBy('description', 'desc');
-    }                  
+    } 
+
+    public function scopeSortByDate($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }                      
 }

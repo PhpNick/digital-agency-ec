@@ -1968,6 +1968,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -59603,7 +59604,7 @@ var render = function() {
               expression: "sort"
             }
           ],
-          staticClass: "form-control my-2 col-sm-3",
+          staticClass: "form-control my-2 col-sm-4",
           on: {
             change: [
               function($event) {
@@ -59634,6 +59635,10 @@ var render = function() {
           _vm._v(" "),
           _c("option", { attrs: { value: "description" } }, [
             _vm._v("по описанию")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "created_at" } }, [
+            _vm._v("по дате публикации")
           ])
         ]
       ),

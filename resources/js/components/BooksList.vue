@@ -11,11 +11,12 @@
         </div>
         </form>
 
-        <select class="form-control my-2 col-sm-3" v-model="sort" @change="sortBooks">
+        <select class="form-control my-2 col-sm-4" v-model="sort" @change="sortBooks">
           <option disabled value="">Сортировка</option>
           <option value="title">по названию</option>
           <option value="author">по автору</option>
           <option value="description">по описанию</option>
+          <option value="created_at">по дате публикации</option>
         </select>
 
 		<div class="card my-2" style="width: 100%;" v-for="book in books" :key="book.id">

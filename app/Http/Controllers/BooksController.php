@@ -71,7 +71,10 @@ class BooksController extends Controller
                 break; 
             case 'description':
                 $books = \App\Models\Book::sortByDescription()->get();
-                break;                               
+                break; 
+            case 'created_at':
+                $books = \App\Models\Book::sortByDate()->get();
+                break;                                              
         }
         if($request->ajax()){
             return array_reverse($books->toArray());
