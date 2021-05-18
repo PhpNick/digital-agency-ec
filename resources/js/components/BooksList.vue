@@ -1,6 +1,6 @@
 <template>
     <div>
-		<h2 class="text-center">Список книг</h2>
+		<h2 class="text-center">Список книг (<router-link to="/add" class="btn btn-link btn-lg" v-if="logged">Добавить книгу</router-link>)</h2>
 
         <form @submit.prevent="searchBooks">
         <div class="input-group">
@@ -11,7 +11,13 @@
         </div>
         </form>
 
-		<router-link to="/add" class="btn btn-link" v-if="logged">Добавить книгу</router-link>
+        <select class="form-control my-2 col-sm-3" v-model="sort" @change="sortBooks">
+          <option disabled value="">Сортировка</option>
+          <option value="title">по названию</option>
+          <option value="author">по автору</option>
+          <option value="description">по описанию</option>
+        </select>
+
 		<div class="card my-2" style="width: 100%;" v-for="book in books" :key="book.id">
 		  <div class="card-body">
             <div class="d-flex justify-content-between">
@@ -35,7 +41,8 @@
             return {
                 books: [],
                 logged: false,
-                searchKey: ''
+                searchKey: '',
+                sort: ''
             }
         },
         created() {
@@ -64,7 +71,15 @@
                 .then(response => {
                     this.books = response.data;
                 });
-            }            
+            },
+
+            sortBooks() { 
+            this.axios
+                .get(`http://localhost:8001/api/books/sort/${this.sort}`)
+                .then(response => {
+                    this.books = response.data;
+                });
+            }                        
         }
     }
 </script>	

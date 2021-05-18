@@ -57,5 +57,24 @@ class BooksController extends Controller
         if($request->ajax()){
             return array_reverse($books->toArray());
         }
-    }               	 
+    }
+
+    public function sort($key, Request $request)
+    {
+        $books = null;
+        switch ($key) {
+            case 'author':
+                $books = \App\Models\Book::sortByAuthor()->get();
+                break;
+            case 'title':
+                $books = \App\Models\Book::sortByTitle()->get();
+                break; 
+            case 'description':
+                $books = \App\Models\Book::sortByDescription()->get();
+                break;                               
+        }
+        if($request->ajax()){
+            return array_reverse($books->toArray());
+        }
+    }                   	 
 }

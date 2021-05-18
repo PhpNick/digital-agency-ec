@@ -38,5 +38,20 @@ class Book extends Model
         'co_author',
         'title',
         'description'
-    ];    
+    ];
+
+    public function scopeSortByAuthor($query)
+    {
+        return $query->orderBy('author', 'desc');
+    }
+
+    public function scopeSortByTitle($query)
+    {
+        return $query->orderBy('title', 'desc');
+    }
+
+    public function scopeSortByDescription($query)
+    {
+        return $query->orderBy('description', 'desc');
+    }                  
 }

@@ -22,4 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('api')->group(function () {
     Route::resource('books', BooksController::class);
     Route::get('/books/search/{key}', [BooksController::class, 'search']);
+    Route::get('/books/sort/{key}', [BooksController::class, 'sort']);
 });

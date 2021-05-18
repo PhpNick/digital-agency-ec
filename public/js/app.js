@@ -1962,12 +1962,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       books: [],
       logged: false,
-      searchKey: ''
+      searchKey: '',
+      sort: ''
     };
   },
   created: function created() {
@@ -1998,6 +2005,13 @@ __webpack_require__.r(__webpack_exports__);
 
       this.axios.get("http://localhost:8001/api/books/search/".concat(this.searchKey)).then(function (response) {
         _this3.books = response.data;
+      });
+    },
+    sortBooks: function sortBooks() {
+      var _this4 = this;
+
+      this.axios.get("http://localhost:8001/api/books/sort/".concat(this.sort)).then(function (response) {
+        _this4.books = response.data;
       });
     }
   }
@@ -59519,7 +59533,22 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h2", { staticClass: "text-center" }, [_vm._v("Список книг")]),
+      _c(
+        "h2",
+        { staticClass: "text-center" },
+        [
+          _vm._v("Список книг ("),
+          _vm.logged
+            ? _c(
+                "router-link",
+                { staticClass: "btn btn-link btn-lg", attrs: { to: "/add" } },
+                [_vm._v("Добавить книгу")]
+              )
+            : _vm._e(),
+          _vm._v(")")
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "form",
@@ -59564,13 +59593,51 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.logged
-        ? _c(
-            "router-link",
-            { staticClass: "btn btn-link", attrs: { to: "/add" } },
-            [_vm._v("Добавить книгу")]
-          )
-        : _vm._e(),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.sort,
+              expression: "sort"
+            }
+          ],
+          staticClass: "form-control my-2 col-sm-3",
+          on: {
+            change: [
+              function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.sort = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              _vm.sortBooks
+            ]
+          }
+        },
+        [
+          _c("option", { attrs: { disabled: "", value: "" } }, [
+            _vm._v("Сортировка")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "title" } }, [_vm._v("по названию")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "author" } }, [_vm._v("по автору")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "description" } }, [
+            _vm._v("по описанию")
+          ])
+        ]
+      ),
       _vm._v(" "),
       _vm._l(_vm.books, function(book) {
         return _c(
