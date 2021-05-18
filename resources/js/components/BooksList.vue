@@ -1,6 +1,16 @@
 <template>
     <div>
 		<h2 class="text-center">Список книг</h2>
+
+        <form @submit.prevent="searchBooks">
+        <div class="input-group">
+          <input v-model="searchKey" class="form-control" id="search-element" requred placeholder="Поиск по каталогу" />
+          <div class="input-group-append">
+          <button type="submit" class="btn btn-primary">Найти книги</button>
+          </div>
+        </div>
+        </form>
+
 		<router-link to="/add" class="btn btn-link" v-if="logged">Добавить книгу</router-link>
 		<div class="card my-2" style="width: 100%;" v-for="book in books" :key="book.id">
 		  <div class="card-body">
@@ -24,7 +34,8 @@
         data() {
             return {
                 books: [],
-                logged: false
+                logged: false,
+                searchKey: ''
             }
         },
         created() {
@@ -45,7 +56,15 @@
                         let i = this.books.map(data => data.id).indexOf(id);
                         this.books.splice(i, 1)
                     });
-            }
+            },
+
+            searchBooks() { 
+            this.axios
+                .get(`http://localhost:8001/api/books/search/${this.searchKey}`)
+                .then(response => {
+                    this.books = response.data;
+                });
+            }            
         }
     }
 </script>	

@@ -49,5 +49,13 @@ class BooksController extends Controller
     {
         $book = Book::find($id);
         return response()->json($book);
-    }           	 
+    }
+
+    public function search($key, Request $request)
+    {
+        $books = \App\Models\Book::search($key)->get();
+        if($request->ajax()){
+            return array_reverse($books->toArray());
+        }
+    }               	 
 }

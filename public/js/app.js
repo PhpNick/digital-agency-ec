@@ -1952,11 +1952,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       books: [],
-      logged: false
+      logged: false,
+      searchKey: ''
     };
   },
   created: function created() {
@@ -1980,6 +1991,13 @@ __webpack_require__.r(__webpack_exports__);
         }).indexOf(id);
 
         _this2.books.splice(i, 1);
+      });
+    },
+    searchBooks: function searchBooks() {
+      var _this3 = this;
+
+      this.axios.get("http://localhost:8001/api/books/search/".concat(this.searchKey)).then(function (response) {
+        _this3.books = response.data;
       });
     }
   }
@@ -59503,6 +59521,49 @@ var render = function() {
     [
       _c("h2", { staticClass: "text-center" }, [_vm._v("Список книг")]),
       _vm._v(" "),
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.searchBooks($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "input-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.searchKey,
+                  expression: "searchKey"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "search-element",
+                requred: "",
+                placeholder: "Поиск по каталогу"
+              },
+              domProps: { value: _vm.searchKey },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.searchKey = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
+        ]
+      ),
+      _vm._v(" "),
       _vm.logged
         ? _c(
             "router-link",
@@ -59577,7 +59638,20 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Найти книги")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
